@@ -1,3 +1,35 @@
+function startExperience() {
+    const overlay = document.getElementById('startOverlay');
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    
+    // Hide overlay
+    overlay.classList.add('hidden');
+    
+    // Save state
+    sessionStorage.setItem('musicStarted', 'true');
+    
+    // Force play music
+    music.muted = false;
+    music.volume = 1.0;
+    
+    music.play().then(() => {
+        musicBtn.classList.add('playing');
+        musicIcon.textContent = '🎵';
+        console.log('Music started successfully');
+    }).catch(err => {
+        console.log('Music play error:', err);
+        // Retry
+        setTimeout(() => {
+            music.play().then(() => {
+                musicBtn.classList.add('playing');
+                musicIcon.textContent = '🎵';
+            });
+        }, 100);
+    });
+}
+
 function openGift() {
     const giftContent = document.getElementById('giftContent');
     const giftBox = document.getElementById('giftBox');
@@ -152,39 +184,13 @@ window.addEventListener('load', function() {
     createStars();
     
     const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    
-    // Preload audio for better mobile support
     music.load();
     
-    // Set initial state
-    musicBtn.classList.add('playing');
-    
-    // Try autoplay
-    const playPromise = music.play();
-    
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            console.log('Music playing');
-        }).catch(err => {
-            console.log('Autoplay blocked, will play on button click');
-            musicBtn.classList.remove('playing');
-            
-            // Play on any user interaction
-            const startMusic = function() {
-                music.play().then(() => {
-                    musicBtn.classList.add('playing');
-                    document.getElementById('musicIcon').textContent = '🎵';
-                }).catch(e => console.log('Play failed:', e));
-                document.removeEventListener('click', startMusic);
-                document.removeEventListener('touchstart', startMusic);
-                document.removeEventListener('touchend', startMusic);
-            };
-            
-            document.addEventListener('click', startMusic);
-            document.addEventListener('touchstart', startMusic);
-            document.addEventListener('touchend', startMusic);
-        });
+    // Check if user has already started (for page refresh)
+    const hasStarted = sessionStorage.getItem('musicStarted');
+    if (hasStarted) {
+        document.getElementById('startOverlay').classList.add('hidden');
+        music.play().catch(err => console.log('Auto-resume failed:', err));
     }
 });
 
