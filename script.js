@@ -5,13 +5,28 @@ function openGift() {
     const musicBtn = document.getElementById('musicBtn');
     const musicIcon = document.getElementById('musicIcon');
     
-    // Play music when opening gift
-    music.play().then(() => {
-        musicBtn.classList.add('playing');
-        musicIcon.textContent = '🎵';
-    }).catch(err => {
-        console.log('Music play error:', err);
-    });
+    // Force play music when opening gift (works better on mobile)
+    music.muted = false;
+    music.volume = 1.0;
+    
+    const playPromise = music.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            musicBtn.classList.add('playing');
+            musicIcon.textContent = '🎵';
+            console.log('Music playing');
+        }).catch(err => {
+            console.log('Music play error:', err);
+            // Retry after a short delay for mobile
+            setTimeout(() => {
+                music.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicIcon.textContent = '🎵';
+                }).catch(e => console.log('Retry failed:', e));
+            }, 100);
+        });
+    }
     
     // Hide gift box with animation
     giftBox.style.animation = 'fadeOut 0.5s ease-out';
@@ -139,6 +154,9 @@ window.addEventListener('load', function() {
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
     
+    // Preload audio for better mobile support
+    music.load();
+    
     // Set initial state
     musicBtn.classList.add('playing');
     
@@ -149,7 +167,7 @@ window.addEventListener('load', function() {
         playPromise.then(() => {
             console.log('Music playing');
         }).catch(err => {
-            console.log('Autoplay blocked, click anywhere to play');
+            console.log('Autoplay blocked, will play on button click');
             musicBtn.classList.remove('playing');
             
             // Play on any user interaction
@@ -157,13 +175,15 @@ window.addEventListener('load', function() {
                 music.play().then(() => {
                     musicBtn.classList.add('playing');
                     document.getElementById('musicIcon').textContent = '🎵';
-                });
+                }).catch(e => console.log('Play failed:', e));
                 document.removeEventListener('click', startMusic);
                 document.removeEventListener('touchstart', startMusic);
+                document.removeEventListener('touchend', startMusic);
             };
             
             document.addEventListener('click', startMusic);
             document.addEventListener('touchstart', startMusic);
+            document.addEventListener('touchend', startMusic);
         });
     }
 });
