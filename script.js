@@ -1,6 +1,17 @@
 function openGift() {
     const giftContent = document.getElementById('giftContent');
     const giftBox = document.getElementById('giftBox');
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    
+    // Play music when opening gift
+    music.play().then(() => {
+        musicBtn.classList.add('playing');
+        musicIcon.textContent = '🎵';
+    }).catch(err => {
+        console.log('Music play error:', err);
+    });
     
     // Hide gift box with animation
     giftBox.style.animation = 'fadeOut 0.5s ease-out';
