@@ -4,11 +4,13 @@ function startExperience() {
     const musicBtn = document.getElementById('musicBtn');
     const musicIcon = document.getElementById('musicIcon');
     
-    // Hide overlay
-    overlay.classList.add('hidden');
+    // Hide overlay with fade animation
+    overlay.style.transition = 'opacity 0.5s ease-out';
+    overlay.style.opacity = '0';
     
-    // Save state
-    sessionStorage.setItem('musicStarted', 'true');
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+    }, 500);
     
     // Force play music
     music.muted = false;
@@ -20,13 +22,18 @@ function startExperience() {
         console.log('Music started successfully');
     }).catch(err => {
         console.log('Music play error:', err);
-        // Retry
-        setTimeout(() => {
+        // Retry multiple times for stubborn browsers
+        let retries = 0;
+        const retryPlay = setInterval(() => {
             music.play().then(() => {
                 musicBtn.classList.add('playing');
                 musicIcon.textContent = '🎵';
+                clearInterval(retryPlay);
+            }).catch(() => {
+                retries++;
+                if (retries > 5) clearInterval(retryPlay);
             });
-        }, 100);
+        }, 200);
     });
 }
 
@@ -185,13 +192,6 @@ window.addEventListener('load', function() {
     
     const music = document.getElementById('bgMusic');
     music.load();
-    
-    // Check if user has already started (for page refresh)
-    const hasStarted = sessionStorage.getItem('musicStarted');
-    if (hasStarted) {
-        document.getElementById('startOverlay').classList.add('hidden');
-        music.play().catch(err => console.log('Auto-resume failed:', err));
-    }
 });
 
 // Add CSS for fadeOut animation
