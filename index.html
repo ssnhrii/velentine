@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💝</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+            <span id="musicIcon">🎵</span>
+        </button>
+        <audio id="bgMusic" loop>
+            <source src="Jun_Munthe_-_HITA_(mp3.pm).mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    
+    <div class="container">
+        <div class="heart-animation">
+            <div class="heart"></div>
+        </div>
+        
+        <h1 class="title">Happy Valentine's Day!</h1>
+        <p class="subtitle">✨ Kenangan Indah Kita Bersama ✨</p>
+        
+        <!-- Photo Gallery -->
+        <div class="photo-gallery" id="photoGallery">
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <img id="preview1" src="WhatsApp Image 2026-02-13 at 10.55.21 PM.jpeg">
+                </div>
+                <p class="photo-caption">📷 Foto 1</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <video id="video2" src="WhatsApp Video 2026-02-13 at 10.52.18 PM.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <p class="photo-caption">🎥 Video 1</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <img id="preview3" src="WhatsApp Image 2026-02-13 at 11.05.30 PM.jpeg">
+                </div>
+                <p class="photo-caption">📷 Foto 2</p>
+            </div>
+            
+            <div class="photo-card">
+                <div class="photo-placeholder">
+                    <video id="video4" src="WhatsApp Video 2026-02-13 at 10.56.30 PM.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <p class="photo-caption">🎥 Video 2</p>
+            </div>
+        </div>
+        
+        <div class="gift-section">
+            <div class="gift-box" id="giftBox">
+            <div class="gift-image">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Gift Box -->
+                    <rect x="50" y="80" width="100" height="80" fill="#60a5fa" stroke="#1e40af" stroke-width="2"/>
+                    <rect x="50" y="60" width="100" height="20" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+                    
+                    <!-- Ribbon Vertical -->
+                    <rect x="95" y="60" width="10" height="100" fill="#fbbf24"/>
+                    
+                    <!-- Ribbon Horizontal -->
+                    <rect x="50" y="95" width="100" height="10" fill="#fbbf24"/>
+                    
+                    <!-- Bow -->
+                    <ellipse cx="85" cy="50" rx="15" ry="10" fill="#fbbf24"/>
+                    <ellipse cx="115" cy="50" rx="15" ry="10" fill="#fbbf24"/>
+                    <circle cx="100" cy="50" r="8" fill="#fbbf24"/>
+                    
+                    <!-- Sparkles -->
+                    <circle cx="40" cy="70" r="3" fill="#fef3c7" opacity="0.8">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="160" cy="90" r="3" fill="#fef3c7" opacity="0.8">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="100" cy="30" r="2" fill="#fef3c7" opacity="0.8">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </div>
+            
+            <p class="message">Untuk orang tersayang 💙</p>
+            
+            <button class="open-btn" onclick="openGift()">Buka Hadiah</button>
+            </div>
+            
+            <div class="gift-content" id="giftContent">
+                <div class="love-message">
+                    <h2>🤍 happy valentine 🤍</h2>
+                    <p>hari ini mungkin banyak orang merayakan dengan bunga, cokelat, atau kata-kata manis. tapi buat aku, valentine bukan cuma tentang itu. valentine adalah pengingat bahwa mencintai seseorang berarti memilihnya setiap hari, bahkan ketika keadaan sedang tidak mudah.</p>
+                    
+                    <p>di momen ini, aku ingin kamu tahu bahwa rasa yang aku punya bukan rasa yang hadir karena suasana, dan bukan juga rasa yang mudah hilang karena masalah kecil. rasa ini tumbuh dari proses—dari cerita yang kita lewati, dari tawa, dari perdebatan, dari semua hal yang perlahan membentuk kita sampai hari ini.</p>
+                    
+                    <p>aku mau jujur sedikit. belakangan ini hubungan kita memang sedang kurang baik. kita jadi lebih sering salah paham, berdebat karena hal-hal kecil, dan kadang memilih diam atau menjauh. itu manusiawi. tapi kalau dibiarkan terus, hal kecil bisa berubah jadi jarak yang tanpa sadar makin jauh.</p>
+                    
+                    <p>di tengah situasi seperti ini, perasaanku tidak berubah. aku tetap sayang, dan aku tetap serius menjalani hubungan ini.</p>
+                    
+                    <p>maaf ya sayang, kalau selama ini aku belum bisa jadi yang terbaik buat kamu. maaf kalau aku belum sepenuhnya bisa menjadi seperti yang kamu inginkan. mungkin aku masih banyak kurangnya, masih banyak hal yang harus aku pelajari untuk bisa lebih mengerti dan lebih menenangkan. tapi percayalah, semua yang aku lakukan selalu dengan niat baik dan rasa yang tulus.</p>
+                    
+                    <p>menurutku, hubungan di usia kita bukan lagi soal siapa yang paling benar atau siapa yang harus selalu dimengerti. tapi tentang bagaimana kita belajar dewasa, saling memahami, dan berani memperbaiki kalau ada yang kurang.</p>
+                    
+                    <p>aku berharap kita sama-sama punya rasa takut kehilangan. bukan dalam arti posesif, tapi dalam arti menghargai dan menjaga apa yang sudah kita bangun bersama. karena sesuatu yang dibangun dengan waktu dan perasaan, pantas untuk diperjuangkan.</p>
+                    
+                    <p>valentine kali ini bukan tentang kata-kata sempurna. ini tentang kejujuran, tentang niat untuk tetap memilih satu sama lain, dan tentang kemauan untuk bertahan ketika keadaan tidak selalu indah.</p>
+                    
+                    <p>aku tetap di sini, bukan karena tidak punya pilihan lain, tapi karena aku memang memilih kamu. dan aku berharap, di hari ini dan seterusnya, kamu juga memilih hal yang sama.</p>
+                    
+                    <p style="text-align: center; font-size: 1.5em; margin-top: 30px;">🤍</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="floating-hearts">
+            <span class="floating-heart">💙</span>
+            <span class="floating-heart">💎</span>
+            <span class="floating-heart">⭐</span>
+            <span class="floating-heart">✨</span>
+            <span class="floating-heart">💫</span>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
